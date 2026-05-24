@@ -1,0 +1,26 @@
+name: KICS
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch: 
+jobs:
+  kics:
+    name: KICS
+    runs-on: ubuntu-24.04
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v3
+    # Scan Iac with kics
+    - name: run kics Scan
+      uses: checkmarx/kics-github-action@v2.1.20
+      with:
+        # scanning two directories: ./terraform/ ./cfn-templates/ plus a single file
+        path: 'terraform,cfn-templates,my-other-sub-folder/Dockerfile'
+        output_path: myResults/
+    # Display the results in json format
+    - name: display kics results
+      run: |
+        cat myResults/results.json
