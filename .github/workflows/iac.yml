@@ -6,12 +6,12 @@ jobs:
     steps:
       - uses: actions/checkout@main  
       - name: Checkov
-        uses: bridgecrewio/checkov-action@main
+        uses: bridgecrewio/checkov-action@master
         with: { directory: ., output_format: sarif }
       - name: Trivy   
-        uses: aquasecurity/trivy-action@main
+        uses: aquasecurity/trivy-action@master
         with: { scan-type: fs, format: sarif, output: trivy.sarif }
       - name: KICS
-        uses: checkmarx/kics-github-action@main
+        uses: checkmarx/kics-github-action@master
       - name: Upload to Code Scanning
         uses: github/codeql-action/upload-sarif@main
