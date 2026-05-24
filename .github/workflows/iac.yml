@@ -4,14 +4,14 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@latest  
+      - uses: actions/checkout@main  
       - name: Checkov
-        uses: bridgecrewio/checkov-action@latest
+        uses: bridgecrewio/checkov-action@main
         with: { directory: ., output_format: sarif }
       - name: Trivy   
-        uses: aquasecurity/trivy-action@latest
+        uses: aquasecurity/trivy-action@main
         with: { scan-type: fs, format: sarif, output: trivy.sarif }
       - name: KICS
-        uses: checkmarx/kics-github-action@latest
+        uses: checkmarx/kics-github-action@main
       - name: Upload to Code Scanning
-        uses: github/codeql-action/upload-sarif@latest
+        uses: github/codeql-action/upload-sarif@main
